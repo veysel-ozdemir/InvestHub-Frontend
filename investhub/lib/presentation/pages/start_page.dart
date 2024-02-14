@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:investhub/const/color_palette.dart';
+import 'package:investhub/route/route_location.dart';
 
 class StartPage extends ConsumerWidget {
   const StartPage({super.key});
@@ -33,7 +34,7 @@ class StartPage extends ConsumerWidget {
           ),
           const Gap(60),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () => context.go(RouteLocations.accountSelection),
             style: const ButtonStyle(
               padding: MaterialStatePropertyAll(
                 EdgeInsets.all(20),
