@@ -3,4 +3,5 @@ class RouteLocations {
 
   static String get start => '/start';
   static String get accountSelection => '/account-selection';
+  static String get register => '/register';
 }

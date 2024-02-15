@@ -1,9 +1,13 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:investhub/const/color_palette.dart';
 import 'package:investhub/presentation/widgets/app_alert.dart';
+import 'package:investhub/route/route_location.dart';
+import 'package:investhub/utils/account_type.dart';
 
 class AccountSelectioPage extends ConsumerStatefulWidget {
   const AccountSelectioPage({super.key});
@@ -18,7 +22,7 @@ class AccountSelectioPage extends ConsumerStatefulWidget {
 }
 
 class _AccountSelectioPageState extends ConsumerState<AccountSelectioPage> {
-  int _selectedAccount = 0;
+  var _selectedAccountType;
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +39,14 @@ class _AccountSelectioPageState extends ConsumerState<AccountSelectioPage> {
                   Size(250, 90),
                 ),
                 backgroundColor: MaterialStatePropertyAll(
-                  _selectedAccount == 1
+                  _selectedAccountType == AccountType.investor
                       ? ColorPalette.darkPurple
                       : ColorPalette.lightBlue,
                 ),
               ),
               onPressed: () {
                 setState(() {
-                  _selectedAccount = 1;
+                  _selectedAccountType = AccountType.investor;
                 });
               },
               child: Text(
@@ -51,7 +55,7 @@ class _AccountSelectioPageState extends ConsumerState<AccountSelectioPage> {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: _selectedAccount == 1
+                  color: _selectedAccountType == AccountType.investor
                       ? ColorPalette.lightBlue
                       : ColorPalette.darkPurple,
                 ),
@@ -64,14 +68,14 @@ class _AccountSelectioPageState extends ConsumerState<AccountSelectioPage> {
                   Size(250, 90),
                 ),
                 backgroundColor: MaterialStatePropertyAll(
-                  _selectedAccount == 2
+                  _selectedAccountType == AccountType.studentCommunity
                       ? ColorPalette.darkPurple
                       : ColorPalette.lightBlue,
                 ),
               ),
               onPressed: () {
                 setState(() {
-                  _selectedAccount = 2;
+                  _selectedAccountType = AccountType.studentCommunity;
                 });
               },
               child: Text(
@@ -80,7 +84,7 @@ class _AccountSelectioPageState extends ConsumerState<AccountSelectioPage> {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: _selectedAccount == 2
+                  color: _selectedAccountType == AccountType.studentCommunity
                       ? ColorPalette.lightBlue
                       : ColorPalette.darkPurple,
                 ),
@@ -93,14 +97,14 @@ class _AccountSelectioPageState extends ConsumerState<AccountSelectioPage> {
                   Size(250, 90),
                 ),
                 backgroundColor: MaterialStatePropertyAll(
-                  _selectedAccount == 3
+                  _selectedAccountType == AccountType.individual
                       ? ColorPalette.darkPurple
                       : ColorPalette.lightBlue,
                 ),
               ),
               onPressed: () {
                 setState(() {
-                  _selectedAccount = 3;
+                  _selectedAccountType = AccountType.individual;
                 });
               },
               child: Text(
@@ -109,7 +113,7 @@ class _AccountSelectioPageState extends ConsumerState<AccountSelectioPage> {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: _selectedAccount == 3
+                  color: _selectedAccountType == AccountType.individual
                       ? ColorPalette.lightBlue
                       : ColorPalette.darkPurple,
                 ),
@@ -126,7 +130,7 @@ class _AccountSelectioPageState extends ConsumerState<AccountSelectioPage> {
                 ),
               ),
               onPressed: () {
-                if (_selectedAccount == 0) {
+                if (_selectedAccountType == null) {
                   AppAlert.showAccountSelectionAnimatedDialog(context);
                 } else {}
               },
@@ -151,9 +155,14 @@ class _AccountSelectioPageState extends ConsumerState<AccountSelectioPage> {
                 ),
               ),
               onPressed: () {
-                if (_selectedAccount == 0) {
+                if (_selectedAccountType == null) {
                   AppAlert.showAccountSelectionAnimatedDialog(context);
-                } else {}
+                } else {
+                  context.push(
+                    RouteLocations.register,
+                    extra: _selectedAccountType,
+                  );
+                }
               },
               child: const Text(
                 "REGISTER",
