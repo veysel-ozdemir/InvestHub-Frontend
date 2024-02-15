@@ -3,36 +3,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:investhub/const/color_palette.dart';
-import 'package:investhub/route/route_location.dart';
-import 'package:investhub/utils/account_type.dart';
 
-class RegisterPage extends ConsumerStatefulWidget {
-  final AccountType? accountType;
-  const RegisterPage({
-    super.key,
-    required this.accountType,
-  });
+class LoginPage extends ConsumerStatefulWidget {
+  const LoginPage({super.key});
 
-  static RegisterPage builder(BuildContext context, GoRouterState state) =>
-      RegisterPage(
-        accountType: state.extra as AccountType?,
-      );
+  static LoginPage builder(BuildContext context, GoRouterState state) =>
+      const LoginPage();
 
   @override
-  ConsumerState<RegisterPage> createState() => _RegisterPageState();
+  ConsumerState<LoginPage> createState() => _LoginPageState();
 }
 
-class _RegisterPageState extends ConsumerState<RegisterPage> {
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _surnameController = TextEditingController();
+class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   @override
   void dispose() {
     super.dispose();
-    _nameController.dispose();
-    _surnameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
   }
@@ -53,9 +41,9 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Gap(30),
+              const Gap(45),
               Container(
-                width: 300,
+                width: 225,
                 padding: const EdgeInsets.all(10),
                 alignment: Alignment.center,
                 decoration: const BoxDecoration(
@@ -65,7 +53,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                   color: ColorPalette.darkPurple,
                 ),
                 child: const Text(
-                  "CREATE AN\nACCOUNT",
+                  "LOGIN",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
@@ -74,97 +62,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                   ),
                 ),
               ),
-              const Gap(20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "\t\tNAME",
-                    style: TextStyle(
-                      color: ColorPalette.blue,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Gap(10),
-                  TextFormField(
-                    controller: _nameController,
-                    style: const TextStyle(
-                      color: ColorPalette.darkPurple,
-                      fontSize: 18,
-                    ),
-                    cursorColor: ColorPalette.blue,
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(
-                        vertical: 0,
-                        horizontal: 10,
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: ColorPalette.blue,
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(45),
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: ColorPalette.blue,
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(45),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const Gap(20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "\t\tSURNAME",
-                    style: TextStyle(
-                      color: ColorPalette.blue,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Gap(10),
-                  TextFormField(
-                    controller: _surnameController,
-                    style: const TextStyle(
-                      color: ColorPalette.darkPurple,
-                      fontSize: 18,
-                    ),
-                    cursorColor: ColorPalette.blue,
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(
-                        vertical: 0,
-                        horizontal: 10,
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: ColorPalette.blue,
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(45),
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: ColorPalette.blue,
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(45),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const Gap(20),
+              const Gap(30),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -209,7 +107,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                   ),
                 ],
               ),
-              const Gap(20),
+              const Gap(30),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -254,7 +152,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                   ),
                 ],
               ),
-              const Gap(20),
+              const Gap(45),
               Column(
                 children: [
                   OutlinedButton(
@@ -274,13 +172,13 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                       ),
                       padding: const MaterialStatePropertyAll(
                         EdgeInsets.symmetric(
-                          horizontal: 30,
+                          horizontal: 45,
                           vertical: 15,
                         ),
                       ),
                     ),
                     child: const Text(
-                      "REGISTER",
+                      "LOGIN",
                       style: TextStyle(
                         color: ColorPalette.blue,
                         fontWeight: FontWeight.bold,
@@ -288,11 +186,11 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                       ),
                     ),
                   ),
-                  const Gap(10),
+                  const Gap(20),
                   TextButton(
-                    onPressed: () => context.push(RouteLocations.login),
+                    onPressed: () {},
                     child: const Text(
-                      "DO YOU ALREADY HAVE AN ACCOUNT?",
+                      "I FORGOT MY PASSWORD?",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: ColorPalette.blue,

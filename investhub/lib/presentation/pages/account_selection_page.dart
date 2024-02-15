@@ -129,11 +129,7 @@ class _AccountSelectioPageState extends ConsumerState<AccountSelectioPage> {
                   ColorPalette.darkPurple,
                 ),
               ),
-              onPressed: () {
-                if (_selectedAccountType == null) {
-                  AppAlert.showAccountSelectionAnimatedDialog(context);
-                } else {}
-              },
+              onPressed: () => context.push(RouteLocations.login),
               child: const Text(
                 "LOGIN",
                 textAlign: TextAlign.center,

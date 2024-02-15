@@ -7,7 +7,7 @@ class AppAlert {
 
   static showAccountSelectionAnimatedDialog(BuildContext context) {
     AlertDialog alertDialog = AlertDialog(
-      title: const Text("Please first select the account type."),
+      title: const Text("Please select the account type first."),
       titleTextStyle: const TextStyle(
         color: ColorPalette.darkPurple,
         fontSize: 20,
