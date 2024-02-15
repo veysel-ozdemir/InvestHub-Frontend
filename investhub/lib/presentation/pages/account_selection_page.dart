@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:investhub/const/color_palette.dart';
+import 'package:investhub/presentation/widgets/app_alert.dart';
 
 class AccountSelectioPage extends ConsumerStatefulWidget {
   const AccountSelectioPage({super.key});
@@ -124,7 +125,11 @@ class _AccountSelectioPageState extends ConsumerState<AccountSelectioPage> {
                   ColorPalette.darkPurple,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                if (_selectedAccount == 0) {
+                  AppAlert.showAccountSelectionAnimatedDialog(context);
+                } else {}
+              },
               child: const Text(
                 "LOGIN",
                 textAlign: TextAlign.center,
@@ -145,7 +150,11 @@ class _AccountSelectioPageState extends ConsumerState<AccountSelectioPage> {
                   ColorPalette.darkPurple,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                if (_selectedAccount == 0) {
+                  AppAlert.showAccountSelectionAnimatedDialog(context);
+                } else {}
+              },
               child: const Text(
                 "REGISTER",
                 textAlign: TextAlign.center,
