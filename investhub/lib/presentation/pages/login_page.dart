@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:investhub/const/color_palette.dart';
+import 'package:investhub/route/route_location.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -156,7 +157,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               Column(
                 children: [
                   OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () =>
+                        context.go(RouteLocations.communityProjectsFeed),
                     style: ButtonStyle(
                       side: const MaterialStatePropertyAll(
                         BorderSide(

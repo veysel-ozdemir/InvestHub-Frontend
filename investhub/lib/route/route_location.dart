@@ -5,4 +5,5 @@ class RouteLocations {
   static String get accountSelection => '/account-selection';
   static String get register => '/register';
   static String get login => '/login';
+  static String get communityProjectsFeed => '/community-projects-feed';
 }
