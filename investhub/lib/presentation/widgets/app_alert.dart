@@ -5,9 +5,14 @@ import 'package:investhub/const/color_palette.dart';
 class AppAlert {
   const AppAlert._();
 
-  static showAccountSelectionAnimatedDialog(BuildContext context) {
+  static showAnimatedDialog({
+    required BuildContext context,
+    required String message,
+    required Color backgroundColor,
+    required Color textColor,
+  }) {
     AlertDialog alertDialog = AlertDialog(
-      title: const Text("Please select the account type first."),
+      title: Text(message),
       titleTextStyle: const TextStyle(
         color: ColorPalette.darkPurple,
         fontSize: 20,
@@ -16,14 +21,14 @@ class AppAlert {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30),
       ),
-      backgroundColor: ColorPalette.lightBlue,
+      backgroundColor: backgroundColor,
       actions: [
         TextButton(
           onPressed: () => context.pop(),
-          child: const Text(
+          child: Text(
             "OK",
             style: TextStyle(
-              color: ColorPalette.darkPurple,
+              color: textColor,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),

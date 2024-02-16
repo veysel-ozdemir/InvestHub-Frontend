@@ -152,7 +152,12 @@ class _AccountSelectioPageState extends ConsumerState<AccountSelectioPage> {
               ),
               onPressed: () {
                 if (_selectedAccountType == null) {
-                  AppAlert.showAccountSelectionAnimatedDialog(context);
+                  AppAlert.showAnimatedDialog(
+                    context: context,
+                    message: "Please select the account type first.",
+                    backgroundColor: ColorPalette.lightBlue,
+                    textColor: ColorPalette.darkPurple,
+                  );
                 } else {
                   context.push(
                     RouteLocations.register,
