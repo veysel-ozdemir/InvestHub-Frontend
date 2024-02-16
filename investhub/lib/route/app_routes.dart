@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:investhub/presentation/pages/account_selection_page.dart';
 import 'package:investhub/presentation/pages/community_projects_feed_page.dart';
+import 'package:investhub/presentation/pages/individual_projects_feed_page.dart';
 import 'package:investhub/presentation/pages/login_page.dart';
 import 'package:investhub/presentation/pages/register_page.dart';
 import 'package:investhub/presentation/pages/start_page.dart';
@@ -34,5 +35,10 @@ final appRoutes = [
     path: RouteLocations.communityProjectsFeed,
     parentNavigatorKey: navigationKey,
     builder: CommunityProjectsFeedPage.builder,
+  ),
+  GoRoute(
+    path: RouteLocations.individualProjectsFeed,
+    parentNavigatorKey: navigationKey,
+    builder: IndividualProjectsFeedPage.builder,
   ),
 ];
