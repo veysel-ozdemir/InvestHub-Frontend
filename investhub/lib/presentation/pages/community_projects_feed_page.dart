@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:investhub/presentation/widgets/app_alert.dart';
 
 class CommunityProjectsFeedPage extends ConsumerStatefulWidget {
   const CommunityProjectsFeedPage({super.key});
@@ -143,7 +144,12 @@ class _CommunityProjectsFeedPageState
         ),
         actions: [
           IconButton.outlined(
-            onPressed: () {},
+            onPressed: () => AppAlert.showAnimatedDialog(
+              context: context,
+              message: "Coming soon...",
+              backgroundColor: Colors.grey,
+              textColor: Colors.black,
+            ),
             icon: const Icon(
               Icons.mail,
               color: Colors.white,

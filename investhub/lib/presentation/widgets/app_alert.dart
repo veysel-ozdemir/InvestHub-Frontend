@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:investhub/const/color_palette.dart';
 
 class AppAlert {
   const AppAlert._();
@@ -13,8 +12,8 @@ class AppAlert {
   }) {
     AlertDialog alertDialog = AlertDialog(
       title: Text(message),
-      titleTextStyle: const TextStyle(
-        color: ColorPalette.darkPurple,
+      titleTextStyle: TextStyle(
+        color: textColor,
         fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
