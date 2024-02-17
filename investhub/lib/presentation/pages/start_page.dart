@@ -14,7 +14,7 @@ class StartPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorPalette.white,
       body: Column(
         children: [
           const Gap(230),
@@ -47,7 +47,7 @@ class StartPage extends ConsumerWidget {
               "GET STARTED",
               style: TextStyle(
                 fontSize: 20,
-                color: Colors.white,
+                color: ColorPalette.white,
               ),
             ),
           ),

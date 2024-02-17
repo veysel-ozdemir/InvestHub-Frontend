@@ -9,4 +9,5 @@ class RouteLocations {
   static String get individualProjectsFeed => '/individual-projects-feed';
   static String get projectDetails => '/project-details';
   static String get communityDetails => '/community-details';
+  static String get investorProfile => '/investor-profile';
 }

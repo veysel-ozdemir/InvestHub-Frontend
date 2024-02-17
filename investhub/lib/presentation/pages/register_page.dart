@@ -40,7 +40,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorPalette.white,
       resizeToAvoidBottomInset: false,
       body: SizedBox.expand(
         child: Padding(
@@ -68,7 +68,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                   "CREATE AN\nACCOUNT",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: ColorPalette.white,
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                   ),
@@ -266,7 +266,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                         ),
                       ),
                       backgroundColor:
-                          const MaterialStatePropertyAll(Colors.white),
+                          const MaterialStatePropertyAll(ColorPalette.white),
                       shape: MaterialStatePropertyAll(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),

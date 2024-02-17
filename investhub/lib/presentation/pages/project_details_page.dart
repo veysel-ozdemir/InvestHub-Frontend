@@ -24,9 +24,9 @@ class ProjectDetailsPage extends ConsumerWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+      backgroundColor: ColorPalette.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: ColorPalette.white,
         leading: IconButton(
           onPressed: () => context.pop(),
           icon: const Icon(
@@ -58,7 +58,7 @@ class ProjectDetailsPage extends ConsumerWidget {
               width: deviceSize.width * 0.85,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.grey,
+                color: ColorPalette.grey,
               ),
               child: const Icon(
                 Icons.image,
@@ -249,7 +249,7 @@ class ProjectDetailsPage extends ConsumerWidget {
                               color: ColorPalette.darkPurple,
                             ),
                             shape: BoxShape.circle,
-                            color: Colors.white,
+                            color: ColorPalette.white,
                           ),
                           child: const Icon(
                             Icons.mail,
@@ -281,7 +281,7 @@ class ProjectDetailsPage extends ConsumerWidget {
                           ),
                           child: const Icon(
                             Icons.phone,
-                            color: Colors.white,
+                            color: ColorPalette.white,
                           ),
                         ),
                         const Gap(10),

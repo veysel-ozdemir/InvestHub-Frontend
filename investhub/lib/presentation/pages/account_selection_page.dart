@@ -27,7 +27,7 @@ class _AccountSelectioPageState extends ConsumerState<AccountSelectioPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorPalette.white,
       body: SizedBox.expand(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -136,7 +136,7 @@ class _AccountSelectioPageState extends ConsumerState<AccountSelectioPage> {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: ColorPalette.white,
                 ),
               ),
             ),
@@ -171,7 +171,7 @@ class _AccountSelectioPageState extends ConsumerState<AccountSelectioPage> {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: ColorPalette.white,
                 ),
               ),
             ),

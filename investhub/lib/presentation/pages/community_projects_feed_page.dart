@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:investhub/const/color_palette.dart';
 import 'package:investhub/presentation/widgets/app_alert.dart';
 import 'package:investhub/route/route_location.dart';
 
@@ -182,25 +183,25 @@ class _CommunityProjectsFeedPageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorPalette.white,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: ColorPalette.white,
         title: TextField(
           controller: _searchController,
           onChanged: (value) => _runFilter(value),
-          cursorColor: Colors.black,
+          cursorColor: ColorPalette.black,
           decoration: const InputDecoration(
             hintText: "Search...",
             prefixIcon: Icon(
               Icons.search,
-              color: Colors.black,
+              color: ColorPalette.black,
             ),
             enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.black),
+              borderSide: BorderSide(color: ColorPalette.black),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.black),
+              borderSide: BorderSide(color: ColorPalette.black),
             ),
           ),
         ),
@@ -209,28 +210,28 @@ class _CommunityProjectsFeedPageState
             onPressed: () => AppAlert.showAnimatedDialog(
               context: context,
               message: "Coming soon...",
-              backgroundColor: Colors.grey,
-              textColor: Colors.black,
+              backgroundColor: ColorPalette.grey,
+              textColor: ColorPalette.black,
             ),
             icon: const Icon(
               Icons.mail,
-              color: Colors.white,
+              color: ColorPalette.white,
             ),
             style: const ButtonStyle(
               backgroundColor: MaterialStatePropertyAll(
-                Colors.black,
+                ColorPalette.black,
               ),
             ),
           ),
           IconButton.outlined(
-            onPressed: () {},
+            onPressed: () => context.push(RouteLocations.investorProfile),
             icon: const Icon(
               Icons.person,
-              color: Colors.white,
+              color: ColorPalette.white,
             ),
             style: const ButtonStyle(
               backgroundColor: MaterialStatePropertyAll(
-                Colors.black,
+                ColorPalette.black,
               ),
             ),
           ),
@@ -246,7 +247,7 @@ class _CommunityProjectsFeedPageState
                 child: Text(
                   "Community Projects",
                   style: TextStyle(
-                    color: Colors.black,
+                    color: ColorPalette.black,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -265,7 +266,7 @@ class _CommunityProjectsFeedPageState
                   child: Card(
                     shape: const BeveledRectangleBorder(),
                     key: ValueKey(_foundCommunityList[index]['id']),
-                    color: Colors.grey[350],
+                    color: ColorPalette.lightGrey,
                     elevation: 4,
                     margin: const EdgeInsets.symmetric(vertical: 10),
                     child: Padding(
@@ -277,7 +278,7 @@ class _CommunityProjectsFeedPageState
                             width: 100,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: Colors.grey,
+                              color: ColorPalette.grey,
                             ),
                             child: const Icon(
                               Icons.image,
@@ -295,7 +296,7 @@ class _CommunityProjectsFeedPageState
                                     textAlign: TextAlign.center,
                                     overflow: TextOverflow.ellipsis,
                                     style: const TextStyle(
-                                      color: Colors.black,
+                                      color: ColorPalette.black,
                                       fontWeight: FontWeight.bold,
                                       fontStyle: FontStyle.italic,
                                       fontSize: 18,
@@ -309,7 +310,7 @@ class _CommunityProjectsFeedPageState
                                     textAlign: TextAlign.center,
                                     overflow: TextOverflow.ellipsis,
                                     style: const TextStyle(
-                                      color: Colors.black,
+                                      color: ColorPalette.black,
                                       fontSize: 14,
                                     ),
                                   ),
