@@ -259,7 +259,7 @@ class _CommunityProjectsFeedPageState
                   ),
                   child: Card(
                     shape: const BeveledRectangleBorder(),
-                    key: ValueKey(index),
+                    key: ValueKey(_foundProjectList[index]['id']),
                     color: Colors.grey[350],
                     elevation: 4,
                     margin: const EdgeInsets.symmetric(vertical: 10),

@@ -8,4 +8,5 @@ class RouteLocations {
   static String get communityProjectsFeed => '/community-projects-feed';
   static String get individualProjectsFeed => '/individual-projects-feed';
   static String get projectDetails => '/project-details';
+  static String get communityDetails => '/community-details';
 }
