@@ -241,9 +241,20 @@ class CommunityDetailsPage extends ConsumerWidget {
                     const Gap(10),
                     Row(
                       children: [
-                        const Icon(
-                          Icons.mail,
-                          color: ColorPalette.darkPurple,
+                        Container(
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              style: BorderStyle.solid,
+                              color: ColorPalette.darkPurple,
+                            ),
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                          ),
+                          child: const Icon(
+                            Icons.mail,
+                            color: ColorPalette.darkPurple,
+                          ),
                         ),
                         const Gap(10),
                         SizedBox(
@@ -262,9 +273,16 @@ class CommunityDetailsPage extends ConsumerWidget {
                     const Gap(10),
                     Row(
                       children: [
-                        const Icon(
-                          Icons.phone,
-                          color: ColorPalette.darkPurple,
+                        Container(
+                          padding: const EdgeInsets.all(5),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: ColorPalette.darkPurple,
+                          ),
+                          child: const Icon(
+                            Icons.phone,
+                            color: Colors.white,
+                          ),
                         ),
                         const Gap(10),
                         SizedBox(
