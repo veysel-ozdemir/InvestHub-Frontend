@@ -7,4 +7,5 @@ class RouteLocations {
   static String get login => '/login';
   static String get communityProjectsFeed => '/community-projects-feed';
   static String get individualProjectsFeed => '/individual-projects-feed';
+  static String get projectDetails => '/project-details';
 }
