@@ -263,7 +263,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                     if (widget.accountType == AccountType.studentCommunity) {
                       context.go(RouteLocations.communityApplicationForm);
                     } else if (widget.accountType == AccountType.individual) {
-                      //
+                      context.go(RouteLocations.projectApplicationForm);
                     } else {
                       //
                     }

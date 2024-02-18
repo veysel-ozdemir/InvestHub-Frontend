@@ -11,4 +11,5 @@ class RouteLocations {
   static String get communityDetails => '/community-details';
   static String get investorProfile => '/investor-profile';
   static String get communityApplicationForm => '/community-application-form';
+  static String get projectApplicationForm => '/project-application-form';
 }

@@ -5,6 +5,7 @@ import 'package:investhub/presentation/pages/community_application_form_page.dar
 import 'package:investhub/presentation/pages/community_details_page.dart';
 import 'package:investhub/presentation/pages/community_projects_feed_page.dart';
 import 'package:investhub/presentation/pages/investor_profile_page.dart';
+import 'package:investhub/presentation/pages/project_application_form_page.dart';
 import 'package:investhub/presentation/pages/project_details_page.dart';
 import 'package:investhub/presentation/pages/individual_projects_feed_page.dart';
 import 'package:investhub/presentation/pages/login_page.dart';
@@ -64,5 +65,10 @@ final appRoutes = [
     path: RouteLocations.communityApplicationForm,
     parentNavigatorKey: navigationKey,
     builder: CommunityApplicationFormPage.builder,
+  ),
+  GoRoute(
+    path: RouteLocations.projectApplicationForm,
+    parentNavigatorKey: navigationKey,
+    builder: ProjectApplicationFormPage.builder,
   ),
 ];
