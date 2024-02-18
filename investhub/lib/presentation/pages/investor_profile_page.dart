@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:investhub/const/color_palette.dart';
+import 'package:investhub/data/investor_data.dart';
 import 'package:investhub/utils/extensions.dart';
 
 class InvestorProfilePage extends ConsumerStatefulWidget {
@@ -23,18 +24,6 @@ class _InvestorProfilePageState extends ConsumerState<InvestorProfilePage> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController aboutController = TextEditingController();
   TextEditingController investmentController = TextEditingController();
-
-  Map<String, dynamic> investor = {
-    "id": 1,
-    "name": "John",
-    "surname": "Smith",
-    "email": "smithinvestmentllc@example.com",
-    "password": "abc123",
-    "phone": "+1 (123) 456-7890",
-    "company_name": "Smith Investments LLC",
-    "about_company": "We specialize in sustainable investments.",
-    "investment": "We are seeking opportunities in renewable energy projects.",
-  };
 
   @override
   void initState() {
