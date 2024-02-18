@@ -1,6 +1,7 @@
 final List<Map<String, dynamic>> communityList = [
   {
     "id": 1,
+    "state": "community",
     "image": "assets/image1.jpg",
     "community_name": "TechEnthusiasts",
     "community_purpose": "Connecting tech enthusiasts and fostering innovation",
@@ -13,6 +14,7 @@ final List<Map<String, dynamic>> communityList = [
   },
   {
     "id": 2,
+    "state": "community",
     "image": "assets/image2.jpg",
     "community_name": "ArtisansHub",
     "community_purpose": "Celebrating creativity and craftsmanship",
@@ -25,6 +27,7 @@ final List<Map<String, dynamic>> communityList = [
   },
   {
     "id": 3,
+    "state": "community",
     "image": "assets/image3.jpg",
     "community_name": "HealthFirst",
     "community_purpose": "Promoting a healthy lifestyle and well-being",
@@ -37,6 +40,7 @@ final List<Map<String, dynamic>> communityList = [
   },
   {
     "id": 4,
+    "state": "community",
     "image": "assets/image4.jpg",
     "community_name": "LanguageLearners",
     "community_purpose": "Exploring and mastering diverse languages together",
@@ -49,6 +53,7 @@ final List<Map<String, dynamic>> communityList = [
   },
   {
     "id": 5,
+    "state": "community",
     "image": "assets/image5.jpg",
     "community_name": "NatureExplorers",
     "community_purpose": "Appreciating and preserving the beauty of nature",
@@ -61,6 +66,7 @@ final List<Map<String, dynamic>> communityList = [
   },
   {
     "id": 6,
+    "state": "community",
     "image": "assets/image6.jpg",
     "community_name": "BookwormsClub",
     "community_purpose": "Sharing the joy of reading and discussing literature",
@@ -73,6 +79,7 @@ final List<Map<String, dynamic>> communityList = [
   },
   {
     "id": 7,
+    "state": "community",
     "image": "assets/image7.jpg",
     "community_name": "CodeCrafters",
     "community_purpose":
@@ -86,6 +93,7 @@ final List<Map<String, dynamic>> communityList = [
   },
   {
     "id": 8,
+    "state": "community",
     "image": "assets/image8.jpg",
     "community_name": "FoodieFiesta",
     "community_purpose": "Exploring diverse cuisines and culinary experiences",
@@ -98,6 +106,7 @@ final List<Map<String, dynamic>> communityList = [
   },
   {
     "id": 9,
+    "state": "community",
     "image": "assets/image9.jpg",
     "community_name": "AdventureSeekers",
     "community_purpose": "Embarking on thrilling adventures and exploration",
@@ -110,6 +119,7 @@ final List<Map<String, dynamic>> communityList = [
   },
   {
     "id": 10,
+    "state": "community",
     "image": "assets/image10.jpg",
     "community_name": "MusicMinds",
     "community_purpose":

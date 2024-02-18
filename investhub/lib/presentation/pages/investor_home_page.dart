@@ -1,50 +1,87 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:investhub/const/color_palette.dart';
 import 'package:investhub/data/community_data.dart';
+import 'package:investhub/data/individual_project_data.dart';
 import 'package:investhub/presentation/widgets/app_alert.dart';
 import 'package:investhub/route/route_location.dart';
 
-class CommunityProjectsFeedPage extends ConsumerStatefulWidget {
-  const CommunityProjectsFeedPage({super.key});
+class InvestorHomePage extends ConsumerStatefulWidget {
+  const InvestorHomePage({super.key});
 
-  static CommunityProjectsFeedPage builder(
-          BuildContext context, GoRouterState state) =>
-      const CommunityProjectsFeedPage();
+  static InvestorHomePage builder(BuildContext context, GoRouterState state) =>
+      const InvestorHomePage();
 
   @override
-  ConsumerState<CommunityProjectsFeedPage> createState() =>
-      _CommunityProjectsFeedPageState();
+  ConsumerState<InvestorHomePage> createState() => _InvestorHomePageState();
 }
 
-class _CommunityProjectsFeedPageState
-    extends ConsumerState<CommunityProjectsFeedPage> {
+class _InvestorHomePageState extends ConsumerState<InvestorHomePage> {
   final TextEditingController _searchController = TextEditingController();
   List<Map<String, dynamic>> _foundCommunityList = [];
 
   void _runFilter(String enteredKeyword) {
-    List<Map<String, dynamic>> results;
+    List<Map<String, dynamic>> communityResults;
+    List<Map<String, dynamic>> projectResults;
+    List<Map<String, dynamic>> mergedResults = [];
+
     if (enteredKeyword.isEmpty) {
-      results = communityList;
+      communityResults = communityList;
+      projectResults = projectList;
     } else {
-      results = communityList
+      communityResults = communityList
           .where((community) => community["community_name"]
+              .toLowerCase()
+              .contains(enteredKeyword.toLowerCase()))
+          .toList();
+      projectResults = projectList
+          .where((project) => project["project_name"]
               .toLowerCase()
               .contains(enteredKeyword.toLowerCase()))
           .toList();
     }
 
+    for (int i = 0;
+        i < max(communityResults.length, projectResults.length);
+        i++) {
+      if (i < communityResults.length) {
+        mergedResults.add(communityResults[i]);
+      }
+
+      if (i < projectResults.length) {
+        mergedResults.add(projectResults[i]);
+      }
+    }
+
     setState(() {
-      _foundCommunityList = results;
+      _foundCommunityList = mergedResults;
     });
   }
 
   @override
   void initState() {
-    _foundCommunityList = communityList;
     super.initState();
+    List<Map<String, dynamic>> communityResults = communityList;
+    List<Map<String, dynamic>> projectResults = projectList;
+    List<Map<String, dynamic>> mergedResults = [];
+
+    for (int i = 0;
+        i < max(communityResults.length, projectResults.length);
+        i++) {
+      if (i < communityResults.length) {
+        mergedResults.add(communityResults[i]);
+      }
+
+      if (i < projectResults.length) {
+        mergedResults.add(projectResults[i]);
+      }
+    }
+
+    _foundCommunityList = mergedResults;
   }
 
   @override
@@ -97,7 +134,10 @@ class _CommunityProjectsFeedPageState
             ),
           ),
           IconButton.outlined(
-            onPressed: () => context.push(RouteLocations.investorProfile),
+            onPressed: () => context.push(
+              RouteLocations.investorProfile,
+              extra: false,
+            ),
             icon: const Icon(
               Icons.person,
               color: ColorPalette.white,
@@ -118,7 +158,7 @@ class _CommunityProjectsFeedPageState
               child: Padding(
                 padding: EdgeInsets.all(15),
                 child: Text(
-                  "Community Projects",
+                  "Community/Individual Projects",
                   style: TextStyle(
                     color: ColorPalette.black,
                     fontSize: 18,
@@ -132,13 +172,19 @@ class _CommunityProjectsFeedPageState
                 physics: const BouncingScrollPhysics(),
                 itemCount: _foundCommunityList.length,
                 itemBuilder: (context, index) => GestureDetector(
-                  onTap: () => context.push(
-                    RouteLocations.communityDetails,
-                    extra: _foundCommunityList[index],
-                  ),
+                  onTap: () =>
+                      _foundCommunityList[index]['state'] == 'community'
+                          ? context.push(
+                              RouteLocations.communityDetails,
+                              extra: _foundCommunityList[index],
+                            )
+                          : context.push(
+                              RouteLocations.projectDetails,
+                              extra: _foundCommunityList[index],
+                            ),
                   child: Card(
                     shape: const BeveledRectangleBorder(),
-                    key: ValueKey(_foundCommunityList[index]['id']),
+                    key: ValueKey(index),
                     color: ColorPalette.lightGrey,
                     elevation: 4,
                     margin: const EdgeInsets.symmetric(vertical: 10),
@@ -163,8 +209,12 @@ class _CommunityProjectsFeedPageState
                               child: Column(
                                 children: [
                                   Text(
-                                    _foundCommunityList[index]
-                                        ["community_name"],
+                                    _foundCommunityList[index]['state'] ==
+                                            'community'
+                                        ? _foundCommunityList[index]
+                                            ["community_name"]
+                                        : _foundCommunityList[index]
+                                            ["project_name"],
                                     maxLines: 1,
                                     textAlign: TextAlign.center,
                                     overflow: TextOverflow.ellipsis,
@@ -177,8 +227,12 @@ class _CommunityProjectsFeedPageState
                                   ),
                                   const Gap(8),
                                   Text(
-                                    _foundCommunityList[index]
-                                        ["community_purpose"],
+                                    _foundCommunityList[index]['state'] ==
+                                            'community'
+                                        ? _foundCommunityList[index]
+                                            ["community_purpose"]
+                                        : _foundCommunityList[index]
+                                            ["project_purpose"],
                                     maxLines: 3,
                                     textAlign: TextAlign.center,
                                     overflow: TextOverflow.ellipsis,

@@ -371,7 +371,10 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                     } else if (_accountType == AccountType.individual) {
                       context.go(RouteLocations.projectApplicationForm);
                     } else {
-                      //
+                      context.go(
+                        RouteLocations.investorProfile,
+                        extra: true,
+                      );
                     }
                   },
                   style: ButtonStyle(

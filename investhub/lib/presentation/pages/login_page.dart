@@ -161,8 +161,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             Column(
               children: [
                 OutlinedButton(
-                  onPressed: () =>
-                      context.go(RouteLocations.communityProjectsFeed),
+                  onPressed: () => context.go(RouteLocations.investorHome),
                   style: ButtonStyle(
                     side: const MaterialStatePropertyAll(
                       BorderSide(

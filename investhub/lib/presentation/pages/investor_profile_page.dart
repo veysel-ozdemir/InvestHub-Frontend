@@ -4,14 +4,21 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:investhub/const/color_palette.dart';
 import 'package:investhub/data/investor_data.dart';
+import 'package:investhub/route/route_location.dart';
 import 'package:investhub/utils/extensions.dart';
 
 class InvestorProfilePage extends ConsumerStatefulWidget {
-  const InvestorProfilePage({super.key});
+  final bool firstEntry;
+  const InvestorProfilePage({
+    super.key,
+    required this.firstEntry,
+  });
 
   static InvestorProfilePage builder(
           BuildContext context, GoRouterState state) =>
-      const InvestorProfilePage();
+      InvestorProfilePage(
+        firstEntry: state.extra as bool,
+      );
 
   @override
   ConsumerState<InvestorProfilePage> createState() =>
@@ -54,11 +61,14 @@ class _InvestorProfilePageState extends ConsumerState<InvestorProfilePage> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: ColorPalette.white,
-        leading: IconButton(
-          onPressed: () => context.pop(),
-          icon: const Icon(
-            Icons.arrow_back,
-            color: ColorPalette.black,
+        leading: Visibility(
+          visible: !widget.firstEntry,
+          child: IconButton(
+            onPressed: () => context.pop(),
+            icon: const Icon(
+              Icons.arrow_back,
+              color: ColorPalette.black,
+            ),
           ),
         ),
       ),
@@ -88,8 +98,9 @@ class _InvestorProfilePageState extends ConsumerState<InvestorProfilePage> {
                   child: SizedBox(
                     child: Column(
                       children: [
-                        Text(
-                          companyNameController.text,
+                        TextField(
+                          maxLines: 2,
+                          controller: companyNameController,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             color: ColorPalette.grey,
@@ -368,7 +379,7 @@ class _InvestorProfilePageState extends ConsumerState<InvestorProfilePage> {
             Align(
               alignment: Alignment.centerRight,
               child: OutlinedButton(
-                onPressed: () {},
+                onPressed: () => context.go(RouteLocations.investorHome),
                 style: const ButtonStyle(
                   side: MaterialStatePropertyAll(
                     BorderSide(

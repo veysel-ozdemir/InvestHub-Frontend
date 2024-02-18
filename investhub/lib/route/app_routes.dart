@@ -3,11 +3,11 @@ import 'package:go_router/go_router.dart';
 import 'package:investhub/presentation/pages/entry_type_selection_page.dart';
 import 'package:investhub/presentation/pages/community_application_form_page.dart';
 import 'package:investhub/presentation/pages/community_details_page.dart';
-import 'package:investhub/presentation/pages/community_projects_feed_page.dart';
+import 'package:investhub/presentation/pages/applicant_home_page.dart';
+import 'package:investhub/presentation/pages/investor_home_page.dart';
 import 'package:investhub/presentation/pages/investor_profile_page.dart';
 import 'package:investhub/presentation/pages/project_application_form_page.dart';
 import 'package:investhub/presentation/pages/project_details_page.dart';
-import 'package:investhub/presentation/pages/individual_projects_feed_page.dart';
 import 'package:investhub/presentation/pages/login_page.dart';
 import 'package:investhub/presentation/pages/register_page.dart';
 import 'package:investhub/presentation/pages/start_page.dart';
@@ -37,14 +37,14 @@ final appRoutes = [
     builder: LoginPage.builder,
   ),
   GoRoute(
-    path: RouteLocations.communityProjectsFeed,
+    path: RouteLocations.investorHome,
     parentNavigatorKey: navigationKey,
-    builder: CommunityProjectsFeedPage.builder,
+    builder: InvestorHomePage.builder,
   ),
   GoRoute(
-    path: RouteLocations.individualProjectsFeed,
+    path: RouteLocations.applicantHome,
     parentNavigatorKey: navigationKey,
-    builder: IndividualProjectsFeedPage.builder,
+    builder: ApplicantHomePage.builder,
   ),
   GoRoute(
     path: RouteLocations.projectDetails,

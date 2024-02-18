@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:investhub/const/color_palette.dart';
+import 'package:investhub/route/route_location.dart';
 import 'package:investhub/utils/extensions.dart';
 
 class CommunityApplicationFormPage extends ConsumerStatefulWidget {
@@ -429,7 +430,7 @@ class _CommunityApplicationFormPageState
               Align(
                 alignment: Alignment.centerRight,
                 child: OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () => context.go(RouteLocations.applicantHome),
                   style: const ButtonStyle(
                     shape: MaterialStatePropertyAll(
                       BeveledRectangleBorder(),

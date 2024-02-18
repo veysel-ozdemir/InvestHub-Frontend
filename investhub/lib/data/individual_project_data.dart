@@ -1,6 +1,7 @@
 final List<Map<String, dynamic>> projectList = [
   {
     "id": 1,
+    "state": "individual",
     "image": "assets/image1.jpg",
     "project_name": "GreenScape Initiative",
     "project_purpose": "Creating sustainable urban green spaces",
@@ -13,6 +14,7 @@ final List<Map<String, dynamic>> projectList = [
   },
   {
     "id": 2,
+    "state": "individual",
     "image": "assets/image2.jpg",
     "project_name": "TechHub Innovation",
     "project_purpose": "Fostering tech innovation in underserved communities",
@@ -25,6 +27,7 @@ final List<Map<String, dynamic>> projectList = [
   },
   {
     "id": 3,
+    "state": "individual",
     "image": "assets/image3.jpg",
     "project_name": "HealthyBites Food Network",
     "project_purpose": "Promoting access to nutritious food for all",
@@ -37,6 +40,7 @@ final List<Map<String, dynamic>> projectList = [
   },
   {
     "id": 4,
+    "state": "individual",
     "image": "assets/image4.jpg",
     "project_name": "TechForGood Foundation",
     "project_purpose": "Harnessing technology to address social challenges",
@@ -49,6 +53,7 @@ final List<Map<String, dynamic>> projectList = [
   },
   {
     "id": 5,
+    "state": "individual",
     "image": "assets/image5.jpg",
     "project_name": "EducationEmpower",
     "project_purpose": "Providing quality education in remote areas",
@@ -61,6 +66,7 @@ final List<Map<String, dynamic>> projectList = [
   },
   {
     "id": 6,
+    "state": "individual",
     "image": "assets/image6.jpg",
     "project_name": "CleanWater Initiative",
     "project_purpose": "Ensuring access to clean water in rural communities",
@@ -73,6 +79,7 @@ final List<Map<String, dynamic>> projectList = [
   },
   {
     "id": 7,
+    "state": "individual",
     "image": "assets/image7.jpg",
     "project_name": "ArtisticExpressions Studio",
     "project_purpose": "Empowering local artists and promoting creativity",
@@ -85,6 +92,7 @@ final List<Map<String, dynamic>> projectList = [
   },
   {
     "id": 8,
+    "state": "individual",
     "image": "assets/image8.jpg",
     "project_name": "RenewableEnergy Solutions",
     "project_purpose": "Transitioning to sustainable and renewable energy",
@@ -97,6 +105,7 @@ final List<Map<String, dynamic>> projectList = [
   },
   {
     "id": 9,
+    "state": "individual",
     "image": "assets/image9.jpg",
     "project_name": "YouthEmpowerment Network",
     "project_purpose": "Empowering youth through education and mentorship",
@@ -109,6 +118,7 @@ final List<Map<String, dynamic>> projectList = [
   },
   {
     "id": 10,
+    "state": "individual",
     "image": "assets/image10.jpg",
     "project_name": "GlobalHealth Access Initiative",
     "project_purpose": "Improving healthcare access in underserved regions",

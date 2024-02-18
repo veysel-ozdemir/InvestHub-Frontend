@@ -17,10 +17,11 @@ class EntryTypeSelectionPage extends ConsumerStatefulWidget {
 
   @override
   ConsumerState<EntryTypeSelectionPage> createState() =>
-      _AccountSelectioPageState();
+      _EntryTypeSelectionPageState();
 }
 
-class _AccountSelectioPageState extends ConsumerState<EntryTypeSelectionPage> {
+class _EntryTypeSelectionPageState
+    extends ConsumerState<EntryTypeSelectionPage> {
   @override
   Widget build(BuildContext context) {
     final deviceSize = context.deviceSize;
