@@ -259,7 +259,15 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
             Column(
               children: [
                 OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (widget.accountType == AccountType.studentCommunity) {
+                      context.go(RouteLocations.communityApplicationForm);
+                    } else if (widget.accountType == AccountType.individual) {
+                      //
+                    } else {
+                      //
+                    }
+                  },
                   style: ButtonStyle(
                     side: const MaterialStatePropertyAll(
                       BorderSide(

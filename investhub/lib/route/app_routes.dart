@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:investhub/presentation/pages/account_selection_page.dart';
+import 'package:investhub/presentation/pages/community_application_form_page.dart';
 import 'package:investhub/presentation/pages/community_details_page.dart';
 import 'package:investhub/presentation/pages/community_projects_feed_page.dart';
 import 'package:investhub/presentation/pages/investor_profile_page.dart';
@@ -58,5 +59,10 @@ final appRoutes = [
     path: RouteLocations.investorProfile,
     parentNavigatorKey: navigationKey,
     builder: InvestorProfilePage.builder,
+  ),
+  GoRoute(
+    path: RouteLocations.communityApplicationForm,
+    parentNavigatorKey: navigationKey,
+    builder: CommunityApplicationFormPage.builder,
   ),
 ];
