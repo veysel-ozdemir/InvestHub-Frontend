@@ -40,7 +40,7 @@ class StartPage extends ConsumerWidget {
             ),
             const Gap(60),
             ElevatedButton(
-              onPressed: () => context.go(RouteLocations.accountSelection),
+              onPressed: () => context.go(RouteLocations.entryTypeSelection),
               style: const ButtonStyle(
                 padding: MaterialStatePropertyAll(
                   EdgeInsets.all(20),

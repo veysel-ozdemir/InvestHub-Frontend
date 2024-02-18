@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:investhub/const/color_palette.dart';
+import 'package:investhub/presentation/widgets/app_alert.dart';
 import 'package:investhub/route/route_location.dart';
 import 'package:investhub/utils/account_type.dart';
+import 'package:investhub/utils/extensions.dart';
 
 class RegisterPage extends ConsumerStatefulWidget {
   final AccountType? accountType;
@@ -27,6 +29,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
   final TextEditingController _surnameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  AccountType? _accountType;
 
   @override
   void dispose() {
@@ -39,6 +42,8 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final deviceSize = context.deviceSize;
+
     return Scaffold(
       backgroundColor: ColorPalette.white,
       resizeToAvoidBottomInset: false,
@@ -56,7 +61,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
           children: [
             const Gap(30),
             Container(
-              width: 300,
+              width: deviceSize.width * 0.6,
               padding: const EdgeInsets.all(10),
               alignment: Alignment.center,
               decoration: const BoxDecoration(
@@ -76,6 +81,100 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
               ),
             ),
             const Gap(20),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "\t\tACCOUNT TYPE",
+                  style: TextStyle(
+                    color: ColorPalette.blue,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Gap(10),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: DropdownButtonFormField(
+                    decoration: const InputDecoration(
+                      hintStyle: TextStyle(
+                        color: ColorPalette.darkPurple,
+                        fontSize: 18,
+                      ),
+                      hintText: "-- Select Type --",
+                      contentPadding: EdgeInsets.symmetric(
+                        vertical: 0,
+                        horizontal: 10,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: ColorPalette.blue,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(45),
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: ColorPalette.blue,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(45),
+                        ),
+                      ),
+                    ),
+                    alignment: Alignment.centerLeft,
+                    iconEnabledColor: ColorPalette.blue,
+                    iconSize: 30,
+                    style: const TextStyle(
+                      color: ColorPalette.darkPurple,
+                      fontSize: 18,
+                    ),
+                    borderRadius: BorderRadius.circular(30),
+                    dropdownColor: ColorPalette.lightBlue,
+                    items: [
+                      DropdownMenuItem(
+                        value: AccountType.investor,
+                        child: Text(
+                          AccountType.investor.name,
+                          style: const TextStyle(
+                            color: ColorPalette.darkPurple,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                      DropdownMenuItem(
+                        value: AccountType.studentCommunity,
+                        child: Text(
+                          AccountType.studentCommunity.name,
+                          style: const TextStyle(
+                            color: ColorPalette.darkPurple,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                      DropdownMenuItem(
+                        value: AccountType.individual,
+                        child: Text(
+                          AccountType.individual.name,
+                          style: const TextStyle(
+                            color: ColorPalette.darkPurple,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ],
+                    value: _accountType,
+                    onChanged: (value) {
+                      setState(() {
+                        _accountType = value;
+                      });
+                    },
+                  ),
+                ),
+              ],
+            ),
+            const Gap(10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -120,7 +219,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                 ),
               ],
             ),
-            const Gap(20),
+            const Gap(10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -165,7 +264,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                 ),
               ],
             ),
-            const Gap(20),
+            const Gap(10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -210,7 +309,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                 ),
               ],
             ),
-            const Gap(20),
+            const Gap(10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -255,14 +354,21 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                 ),
               ],
             ),
-            const Gap(20),
+            const Gap(10),
             Column(
               children: [
                 OutlinedButton(
                   onPressed: () {
-                    if (widget.accountType == AccountType.studentCommunity) {
+                    if (_accountType == null) {
+                      AppAlert.showAnimatedDialog(
+                        context: context,
+                        message: "Please select the account type first.",
+                        backgroundColor: ColorPalette.lightBlue,
+                        textColor: ColorPalette.darkPurple,
+                      );
+                    } else if (_accountType == AccountType.studentCommunity) {
                       context.go(RouteLocations.communityApplicationForm);
-                    } else if (widget.accountType == AccountType.individual) {
+                    } else if (_accountType == AccountType.individual) {
                       context.go(RouteLocations.projectApplicationForm);
                     } else {
                       //

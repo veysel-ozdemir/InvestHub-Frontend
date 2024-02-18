@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:investhub/const/color_palette.dart';
 import 'package:investhub/route/route_location.dart';
+import 'package:investhub/utils/extensions.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -28,6 +29,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final deviceSize = context.deviceSize;
+
     return Scaffold(
       backgroundColor: ColorPalette.white,
       resizeToAvoidBottomInset: false,
@@ -45,7 +48,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           children: [
             const Gap(45),
             Container(
-              width: 225,
+              width: deviceSize.width * 0.55,
               padding: const EdgeInsets.all(10),
               alignment: Alignment.center,
               decoration: const BoxDecoration(
