@@ -38,6 +38,10 @@ dependencies:
   gap: ^3.0.1
   go_router: ^13.2.0
   flutter_riverpod: ^2.4.10
+  firebase_core: ^2.25.4
+  firebase_auth: ^4.17.4
+  equatable: ^2.0.5
+  cloud_firestore: ^4.15.5
 
 dev_dependencies:
   flutter_test:

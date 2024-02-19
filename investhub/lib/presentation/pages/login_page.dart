@@ -1,7 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:investhub/auth/auth_service.dart';
 import 'package:investhub/const/color_palette.dart';
 import 'package:investhub/route/route_location.dart';
 import 'package:investhub/utils/extensions.dart';
@@ -127,6 +130,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 const Gap(10),
                 TextFormField(
                   controller: _passwordController,
+                  obscureText: true,
                   style: const TextStyle(
                     color: ColorPalette.darkPurple,
                     fontSize: 18,
@@ -161,7 +165,31 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             Column(
               children: [
                 OutlinedButton(
-                  onPressed: () => context.go(RouteLocations.investorHome),
+                  onPressed: () async {
+                    final message = await AuthService().login(
+                      email: _emailController.text,
+                      password: _passwordController.text,
+                    );
+                    if (message!.contains('Success')) {
+                      // ! according to the bounded account type
+                      // ! with the email address, navigation happens.
+                      // ! if the account type is not an investor acc,
+                      // ! the form app page has to be shown.
+                      context.go(RouteLocations.investorHome);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            message,
+                            style: const TextStyle(
+                              color: ColorPalette.white,
+                            ),
+                          ),
+                          backgroundColor: ColorPalette.darkPurple,
+                        ),
+                      );
+                    }
+                  },
                   style: ButtonStyle(
                     side: const MaterialStatePropertyAll(
                       BorderSide(
@@ -193,7 +221,37 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 ),
                 const Gap(20),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    final message = await AuthService()
+                        .resetPassword(email: _emailController.text);
+                    if (message!.contains('Success')) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            "Check your mailbox. We have sent you an email to reset the password.",
+                            style: TextStyle(
+                              color: ColorPalette.white,
+                            ),
+                          ),
+                          backgroundColor: ColorPalette.darkPurple,
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            _emailController.text.isNotEmpty
+                                ? message
+                                : "Enter your email first.",
+                            style: const TextStyle(
+                              color: ColorPalette.white,
+                            ),
+                          ),
+                          backgroundColor: ColorPalette.darkPurple,
+                        ),
+                      );
+                    }
+                  },
                   child: const Text(
                     "I FORGOT MY PASSWORD?",
                     textAlign: TextAlign.center,

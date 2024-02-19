@@ -1,6 +1,7 @@
 final List<Map<String, dynamic>> projectList = [
   {
     "id": 1,
+    "form_filled": true,
     "state": "individual",
     "image": "assets/image1.jpg",
     "project_name": "GreenScape Initiative",
@@ -14,6 +15,7 @@ final List<Map<String, dynamic>> projectList = [
   },
   {
     "id": 2,
+    "form_filled": true,
     "state": "individual",
     "image": "assets/image2.jpg",
     "project_name": "TechHub Innovation",
@@ -27,6 +29,7 @@ final List<Map<String, dynamic>> projectList = [
   },
   {
     "id": 3,
+    "form_filled": true,
     "state": "individual",
     "image": "assets/image3.jpg",
     "project_name": "HealthyBites Food Network",
@@ -40,6 +43,7 @@ final List<Map<String, dynamic>> projectList = [
   },
   {
     "id": 4,
+    "form_filled": true,
     "state": "individual",
     "image": "assets/image4.jpg",
     "project_name": "TechForGood Foundation",
@@ -53,6 +57,7 @@ final List<Map<String, dynamic>> projectList = [
   },
   {
     "id": 5,
+    "form_filled": true,
     "state": "individual",
     "image": "assets/image5.jpg",
     "project_name": "EducationEmpower",
@@ -66,6 +71,7 @@ final List<Map<String, dynamic>> projectList = [
   },
   {
     "id": 6,
+    "form_filled": true,
     "state": "individual",
     "image": "assets/image6.jpg",
     "project_name": "CleanWater Initiative",
@@ -79,6 +85,7 @@ final List<Map<String, dynamic>> projectList = [
   },
   {
     "id": 7,
+    "form_filled": true,
     "state": "individual",
     "image": "assets/image7.jpg",
     "project_name": "ArtisticExpressions Studio",
@@ -92,6 +99,7 @@ final List<Map<String, dynamic>> projectList = [
   },
   {
     "id": 8,
+    "form_filled": true,
     "state": "individual",
     "image": "assets/image8.jpg",
     "project_name": "RenewableEnergy Solutions",
@@ -105,6 +113,7 @@ final List<Map<String, dynamic>> projectList = [
   },
   {
     "id": 9,
+    "form_filled": true,
     "state": "individual",
     "image": "assets/image9.jpg",
     "project_name": "YouthEmpowerment Network",
@@ -118,6 +127,7 @@ final List<Map<String, dynamic>> projectList = [
   },
   {
     "id": 10,
+    "form_filled": true,
     "state": "individual",
     "image": "assets/image10.jpg",
     "project_name": "GlobalHealth Access Initiative",

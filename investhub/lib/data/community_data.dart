@@ -1,6 +1,7 @@
 final List<Map<String, dynamic>> communityList = [
   {
     "id": 1,
+    "form_filled": true,
     "state": "community",
     "image": "assets/image1.jpg",
     "community_name": "TechEnthusiasts",
@@ -14,6 +15,7 @@ final List<Map<String, dynamic>> communityList = [
   },
   {
     "id": 2,
+    "form_filled": true,
     "state": "community",
     "image": "assets/image2.jpg",
     "community_name": "ArtisansHub",
@@ -27,6 +29,7 @@ final List<Map<String, dynamic>> communityList = [
   },
   {
     "id": 3,
+    "form_filled": true,
     "state": "community",
     "image": "assets/image3.jpg",
     "community_name": "HealthFirst",
@@ -40,6 +43,7 @@ final List<Map<String, dynamic>> communityList = [
   },
   {
     "id": 4,
+    "form_filled": true,
     "state": "community",
     "image": "assets/image4.jpg",
     "community_name": "LanguageLearners",
@@ -53,6 +57,7 @@ final List<Map<String, dynamic>> communityList = [
   },
   {
     "id": 5,
+    "form_filled": true,
     "state": "community",
     "image": "assets/image5.jpg",
     "community_name": "NatureExplorers",
@@ -66,6 +71,7 @@ final List<Map<String, dynamic>> communityList = [
   },
   {
     "id": 6,
+    "form_filled": true,
     "state": "community",
     "image": "assets/image6.jpg",
     "community_name": "BookwormsClub",
@@ -79,6 +85,7 @@ final List<Map<String, dynamic>> communityList = [
   },
   {
     "id": 7,
+    "form_filled": true,
     "state": "community",
     "image": "assets/image7.jpg",
     "community_name": "CodeCrafters",
@@ -93,6 +100,7 @@ final List<Map<String, dynamic>> communityList = [
   },
   {
     "id": 8,
+    "form_filled": true,
     "state": "community",
     "image": "assets/image8.jpg",
     "community_name": "FoodieFiesta",
@@ -106,6 +114,7 @@ final List<Map<String, dynamic>> communityList = [
   },
   {
     "id": 9,
+    "form_filled": true,
     "state": "community",
     "image": "assets/image9.jpg",
     "community_name": "AdventureSeekers",
@@ -119,6 +128,7 @@ final List<Map<String, dynamic>> communityList = [
   },
   {
     "id": 10,
+    "form_filled": true,
     "state": "community",
     "image": "assets/image10.jpg",
     "community_name": "MusicMinds",

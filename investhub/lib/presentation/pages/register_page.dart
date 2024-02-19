@@ -1,7 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:investhub/auth/auth_service.dart';
 import 'package:investhub/const/color_palette.dart';
 import 'package:investhub/presentation/widgets/app_alert.dart';
 import 'package:investhub/route/route_location.dart';
@@ -324,6 +327,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                 const Gap(10),
                 TextFormField(
                   controller: _passwordController,
+                  obscureText: true,
                   style: const TextStyle(
                     color: ColorPalette.darkPurple,
                     fontSize: 18,
@@ -358,7 +362,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
             Column(
               children: [
                 OutlinedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_accountType == null) {
                       AppAlert.showAnimatedDialog(
                         context: context,
@@ -366,15 +370,45 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                         backgroundColor: ColorPalette.lightBlue,
                         textColor: ColorPalette.darkPurple,
                       );
-                    } else if (_accountType == AccountType.studentCommunity) {
-                      context.go(RouteLocations.communityApplicationForm);
-                    } else if (_accountType == AccountType.individual) {
-                      context.go(RouteLocations.projectApplicationForm);
-                    } else {
-                      context.go(
-                        RouteLocations.investorProfile,
-                        extra: true,
+                    } else if (_nameController.text.isEmpty ||
+                        _surnameController.text.isEmpty ||
+                        _emailController.text.isEmpty ||
+                        _passwordController.text.isEmpty) {
+                      AppAlert.showAnimatedDialog(
+                        context: context,
+                        message: "Please fill all the blanks.",
+                        backgroundColor: ColorPalette.lightBlue,
+                        textColor: ColorPalette.darkPurple,
                       );
+                    } else {
+                      final message = await AuthService().registration(
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                      );
+                      if (message!.contains('Success')) {
+                        if (_accountType == AccountType.studentCommunity) {
+                          context.go(RouteLocations.communityApplicationForm);
+                        } else if (_accountType == AccountType.individual) {
+                          context.go(RouteLocations.projectApplicationForm);
+                        } else {
+                          context.go(
+                            RouteLocations.investorProfile,
+                            extra: true,
+                          );
+                        }
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              message,
+                              style: const TextStyle(
+                                color: ColorPalette.white,
+                              ),
+                            ),
+                            backgroundColor: ColorPalette.darkPurple,
+                          ),
+                        );
+                      }
                     }
                   },
                   style: ButtonStyle(
