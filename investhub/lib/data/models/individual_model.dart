@@ -46,7 +46,7 @@ class IndividualModel extends Equatable {
       };
 
   factory IndividualModel.fromMap(Map<String, dynamic> map) => IndividualModel(
-        id: map['id'] as int,
+        id: map['id'] as int?,
         formFilled: map['form_filled'] as bool,
         state: map['state'] as String,
         projectName: map['project_name'] as String,

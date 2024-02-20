@@ -1,8 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:investhub/cloud/cloud_service.dart';
 import 'package:investhub/const/color_palette.dart';
+import 'package:investhub/presentation/widgets/app_alert.dart';
 import 'package:investhub/route/route_location.dart';
 import 'package:investhub/utils/extensions.dart';
 
@@ -475,7 +479,51 @@ class _ProjectApplicationFormPageState
               Align(
                 alignment: Alignment.centerRight,
                 child: OutlinedButton(
-                  onPressed: () => context.go(RouteLocations.applicantHome),
+                  onPressed: () async {
+                    if (nameController.text.isEmpty ||
+                        surnameController.text.isEmpty ||
+                        emailController.text.isEmpty ||
+                        phoneController.text.isEmpty ||
+                        projectNameController.text.isEmpty ||
+                        projectPurposeController.text.isEmpty ||
+                        aboutMeController.text.isEmpty ||
+                        investmentController.text.isEmpty) {
+                      AppAlert.showAnimatedDialog(
+                        context: context,
+                        message: "Please fill all the blanks.",
+                        backgroundColor: ColorPalette.grey,
+                        textColor: ColorPalette.black,
+                      );
+                    } else {
+                      final message = await CloudService().editIndividual(
+                        context: context,
+                        formFilled: true,
+                        name: nameController.text,
+                        surname: surnameController.text,
+                        email: emailController.text,
+                        phone: phoneController.text,
+                        projectName: projectNameController.text,
+                        projectPurpose: projectPurposeController.text,
+                        aboutMe: aboutMeController.text,
+                        investment: investmentController.text,
+                      );
+                      if (message!.contains('Success')) {
+                        context.go(RouteLocations.applicantHome);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              message,
+                              style: const TextStyle(
+                                color: ColorPalette.white,
+                              ),
+                            ),
+                            backgroundColor: ColorPalette.black,
+                          ),
+                        );
+                      }
+                    }
+                  },
                   style: const ButtonStyle(
                     shape: MaterialStatePropertyAll(
                       BeveledRectangleBorder(),

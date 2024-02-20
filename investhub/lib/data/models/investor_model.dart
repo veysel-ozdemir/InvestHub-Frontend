@@ -40,7 +40,7 @@ class InvestorModel extends Equatable {
       };
 
   factory InvestorModel.fromMap(Map<String, dynamic> map) => InvestorModel(
-        id: map['id'] as int,
+        id: map['id'] as int?,
         formFilled: map['form_filled'] as bool,
         name: map['name'] as String,
         surname: map['surname'] as String,

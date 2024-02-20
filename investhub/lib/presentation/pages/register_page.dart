@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:investhub/auth/auth_service.dart';
+import 'package:investhub/cloud/cloud_service.dart';
 import 'package:investhub/const/color_palette.dart';
 import 'package:investhub/presentation/widgets/app_alert.dart';
 import 'package:investhub/route/route_location.dart';
@@ -387,10 +388,16 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                       );
                       if (message!.contains('Success')) {
                         if (_accountType == AccountType.studentCommunity) {
+                          CloudService().createStudentCommunity(
+                              email: _emailController.text);
                           context.go(RouteLocations.communityApplicationForm);
                         } else if (_accountType == AccountType.individual) {
+                          CloudService()
+                              .createIndividual(email: _emailController.text);
                           context.go(RouteLocations.projectApplicationForm);
                         } else {
+                          CloudService()
+                              .createInvestor(email: _emailController.text);
                           context.go(
                             RouteLocations.investorProfile,
                             extra: true,

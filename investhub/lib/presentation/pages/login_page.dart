@@ -1,11 +1,15 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:investhub/auth/auth_service.dart';
+import 'package:investhub/cloud/cloud_service.dart';
 import 'package:investhub/const/color_palette.dart';
+import 'package:investhub/data/models/individual_model.dart';
+import 'package:investhub/data/models/student_community_model.dart';
 import 'package:investhub/route/route_location.dart';
 import 'package:investhub/utils/extensions.dart';
 
@@ -171,11 +175,81 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       password: _passwordController.text,
                     );
                     if (message!.contains('Success')) {
-                      // ! according to the bounded account type
-                      // ! with the email address, navigation happens.
-                      // ! if the account type is not an investor acc,
-                      // ! the form app page has to be shown.
-                      context.go(RouteLocations.investorHome);
+                      QuerySnapshot querySnapshot;
+                      DocumentSnapshot? document;
+                      try {
+                        querySnapshot = await CloudService()
+                            .investors
+                            .where('email', isEqualTo: _emailController.text)
+                            .get();
+                        if (querySnapshot.docs.isNotEmpty) {
+                          document = querySnapshot.docs.first;
+                          // first way of getting the value of a field of document from database
+                          CloudService().investors.doc(document.id).get();
+                          final data = document.data() as Map<String, dynamic>;
+                          if (data['form_filled'] == true) {
+                            context.go(RouteLocations.investorHome);
+                          } else {
+                            context.go(
+                              RouteLocations.investorProfile,
+                              extra: true,
+                            );
+                          }
+                        } else {
+                          querySnapshot = await CloudService()
+                              .studentCommunity
+                              .where('email', isEqualTo: _emailController.text)
+                              .get();
+                          if (querySnapshot.docs.isNotEmpty) {
+                            document = querySnapshot.docs.first;
+                            // second way of getting the value of a field of document from database
+                            StudentCommunityModel studentCommunityModel =
+                                StudentCommunityModel.fromMap(
+                                    document.data() as Map<String, dynamic>);
+                            if (studentCommunityModel.formFilled) {
+                              context.go(RouteLocations.applicantHome);
+                            } else {
+                              context
+                                  .go(RouteLocations.communityApplicationForm);
+                            }
+                          } else {
+                            querySnapshot = await CloudService()
+                                .individuals
+                                .where('email',
+                                    isEqualTo: _emailController.text)
+                                .get();
+                            if (querySnapshot.docs.isNotEmpty) {
+                              document = querySnapshot.docs.first;
+                              IndividualModel individualModel =
+                                  IndividualModel.fromMap(
+                                      document.data() as Map<String, dynamic>);
+                              if (individualModel.formFilled) {
+                                context.go(RouteLocations.applicantHome);
+                              } else {
+                                context
+                                    .go(RouteLocations.projectApplicationForm);
+                              }
+                            } else {
+                              document = null;
+                            }
+                          }
+                        }
+                        if (document == null) {
+                          throw Exception();
+                        }
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              message,
+                              style: const TextStyle(
+                                color: ColorPalette.white,
+                              ),
+                            ),
+                            backgroundColor: ColorPalette.darkPurple,
+                          ),
+                        );
+                      }
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(

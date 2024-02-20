@@ -1,9 +1,13 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:investhub/cloud/cloud_service.dart';
 import 'package:investhub/const/color_palette.dart';
 import 'package:investhub/data/investor_data.dart';
+import 'package:investhub/presentation/widgets/app_alert.dart';
 import 'package:investhub/route/route_location.dart';
 import 'package:investhub/utils/extensions.dart';
 
@@ -35,11 +39,14 @@ class _InvestorProfilePageState extends ConsumerState<InvestorProfilePage> {
   @override
   void initState() {
     super.initState();
-    companyNameController.text = investor['company_name'];
-    emailController.text = investor['email'];
-    phoneController.text = investor['phone'];
-    aboutController.text = investor['about_company'];
-    investmentController.text = investor['investment'];
+    if (!widget.firstEntry) {
+      // ! set the investor account info details
+      companyNameController.text = investor['company_name'];
+      emailController.text = investor['email'];
+      phoneController.text = investor['phone'];
+      aboutController.text = investor['about_company'];
+      investmentController.text = investor['investment'];
+    }
   }
 
   @override
@@ -379,7 +386,45 @@ class _InvestorProfilePageState extends ConsumerState<InvestorProfilePage> {
             Align(
               alignment: Alignment.centerRight,
               child: OutlinedButton(
-                onPressed: () => context.go(RouteLocations.investorHome),
+                onPressed: () async {
+                  if (companyNameController.text.isEmpty ||
+                      emailController.text.isEmpty ||
+                      phoneController.text.isEmpty ||
+                      aboutController.text.isEmpty ||
+                      investmentController.text.isEmpty) {
+                    AppAlert.showAnimatedDialog(
+                      context: context,
+                      message: "Please fill all the blanks.",
+                      backgroundColor: ColorPalette.grey,
+                      textColor: ColorPalette.black,
+                    );
+                  } else {
+                    final message = await CloudService().editInvestor(
+                      context: context,
+                      formFilled: true,
+                      email: emailController.text,
+                      companyName: companyNameController.text,
+                      aboutCompany: aboutController.text,
+                      investment: investmentController.text,
+                      phone: phoneController.text,
+                    );
+                    if (message!.contains('Success')) {
+                      context.go(RouteLocations.investorHome);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            message,
+                            style: const TextStyle(
+                              color: ColorPalette.white,
+                            ),
+                          ),
+                          backgroundColor: ColorPalette.black,
+                        ),
+                      );
+                    }
+                  }
+                },
                 style: const ButtonStyle(
                   side: MaterialStatePropertyAll(
                     BorderSide(

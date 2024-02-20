@@ -44,7 +44,7 @@ class StudentCommunityModel extends Equatable {
 
   factory StudentCommunityModel.fromMap(Map<String, dynamic> map) =>
       StudentCommunityModel(
-        id: map['id'] as int,
+        id: map['id'] as int?,
         formFilled: map['form_filled'] as bool,
         state: map['state'] as String,
         communityName: map['community_name'] as String,
