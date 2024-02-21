@@ -1,13 +1,15 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:investhub/cloud/cloud_service.dart';
 import 'package:investhub/const/color_palette.dart';
-import 'package:investhub/data/investor_data.dart';
+import 'package:investhub/data/models/investor_model.dart';
 import 'package:investhub/presentation/widgets/app_alert.dart';
+import 'package:investhub/provider/investor_email_provider.dart';
 import 'package:investhub/route/route_location.dart';
 import 'package:investhub/utils/extensions.dart';
 
@@ -36,16 +38,42 @@ class _InvestorProfilePageState extends ConsumerState<InvestorProfilePage> {
   TextEditingController aboutController = TextEditingController();
   TextEditingController investmentController = TextEditingController();
 
+  Future<void> _fetchData(String investorEmail) async {
+    QuerySnapshot querySnapshot;
+    DocumentSnapshot document;
+    try {
+      querySnapshot = await CloudService()
+          .investors
+          .where('email', isEqualTo: investorEmail)
+          .get();
+      if (querySnapshot.docs.isNotEmpty) {
+        document = querySnapshot.docs.first;
+
+        InvestorModel investorModel =
+            InvestorModel.fromMap(document.data() as Map<String, dynamic>);
+
+        setState(() {
+          companyNameController.text = investorModel.companyName;
+          emailController.text = investorModel.email;
+          phoneController.text = investorModel.phone;
+          aboutController.text = investorModel.aboutCompany;
+          investmentController.text = investorModel.investment;
+        });
+        print('Success');
+      } else {
+        print('Something went wrong. Perhaps entered email did not match.');
+      }
+    } catch (e) {
+      print('Something went wrong.\n$e');
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     if (!widget.firstEntry) {
-      // ! set the investor account info details
-      companyNameController.text = investor['company_name'];
-      emailController.text = investor['email'];
-      phoneController.text = investor['phone'];
-      aboutController.text = investor['about_company'];
-      investmentController.text = investor['investment'];
+      final investorEmail = ref.read(investorEmailProvider);
+      _fetchData(investorEmail);
     }
   }
 
@@ -409,6 +437,11 @@ class _InvestorProfilePageState extends ConsumerState<InvestorProfilePage> {
                       phone: phoneController.text,
                     );
                     if (message!.contains('Success')) {
+                      if (widget.firstEntry) {
+                        ref
+                            .read(investorEmailProvider.notifier)
+                            .updateEmail(emailController.text);
+                      }
                       context.go(RouteLocations.investorHome);
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(

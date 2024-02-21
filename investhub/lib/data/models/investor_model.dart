@@ -46,8 +46,8 @@ class InvestorModel extends Equatable {
         surname: map['surname'] as String,
         email: map['email'] as String,
         phone: map['phone'] as String,
-        companyName: map['companyName'] as String,
-        aboutCompany: map['aboutCompany'] as String,
+        companyName: map['company_name'] as String,
+        aboutCompany: map['about_company'] as String,
         investment: map['investment'] as String,
         image: map['image'] as Image?,
       );

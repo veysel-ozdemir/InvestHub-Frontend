@@ -5,17 +5,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:investhub/const/color_palette.dart';
+import 'package:investhub/data/models/individual_model.dart';
 import 'package:investhub/utils/extensions.dart';
 
 class ProjectDetailsPage extends ConsumerWidget {
-  Map<String, dynamic> project;
+  IndividualModel project;
 
   ProjectDetailsPage({super.key, required this.project});
 
   static ProjectDetailsPage builder(
           BuildContext context, GoRouterState state) =>
       ProjectDetailsPage(
-        project: state.extra as Map<String, dynamic>,
+        project: state.extra as IndividualModel,
       );
 
   @override
@@ -38,7 +39,7 @@ class ProjectDetailsPage extends ConsumerWidget {
           physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
           child: Text(
-            project['project_name'],
+            project.projectName,
             style: const TextStyle(
               color: ColorPalette.blue,
               fontSize: 20,
@@ -75,7 +76,7 @@ class ProjectDetailsPage extends ConsumerWidget {
               ),
               cursorColor: ColorPalette.blue,
               readOnly: true,
-              initialValue: '${project["name"]} ${project["surname"]}',
+              initialValue: '${project.name} ${project.surname}',
               decoration: const InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
                   vertical: 0,
@@ -114,7 +115,7 @@ class ProjectDetailsPage extends ConsumerWidget {
               maxLines: 2,
               cursorColor: ColorPalette.blue,
               readOnly: true,
-              initialValue: project['about_me'],
+              initialValue: project.aboutMe,
               decoration: const InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
                   vertical: 10,
@@ -153,7 +154,7 @@ class ProjectDetailsPage extends ConsumerWidget {
               maxLines: 2,
               cursorColor: ColorPalette.blue,
               readOnly: true,
-              initialValue: project['project_purpose'],
+              initialValue: project.projectPurpose,
               decoration: const InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
                   vertical: 10,
@@ -190,7 +191,7 @@ class ProjectDetailsPage extends ConsumerWidget {
                 fontSize: 16,
               ),
               maxLines: 2,
-              initialValue: project['investment'],
+              initialValue: project.investment,
               readOnly: true,
               cursorColor: ColorPalette.blue,
               decoration: const InputDecoration(
@@ -260,7 +261,7 @@ class ProjectDetailsPage extends ConsumerWidget {
                         SizedBox(
                           width: deviceSize.width * 0.6,
                           child: SelectableText(
-                            project['email'],
+                            project.email,
                             style: const TextStyle(
                               color: ColorPalette.darkPurple,
                               fontSize: 15,
@@ -288,7 +289,7 @@ class ProjectDetailsPage extends ConsumerWidget {
                         SizedBox(
                           width: deviceSize.width * 0.6,
                           child: SelectableText(
-                            project['phone'],
+                            project.phone,
                             style: const TextStyle(
                               color: ColorPalette.darkPurple,
                               fontSize: 15,

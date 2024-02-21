@@ -5,17 +5,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:investhub/const/color_palette.dart';
+import 'package:investhub/data/models/student_community_model.dart';
 import 'package:investhub/utils/extensions.dart';
 
 class CommunityDetailsPage extends ConsumerWidget {
-  Map<String, dynamic> community;
+  StudentCommunityModel community;
 
   CommunityDetailsPage({super.key, required this.community});
 
   static CommunityDetailsPage builder(
           BuildContext context, GoRouterState state) =>
       CommunityDetailsPage(
-        community: state.extra as Map<String, dynamic>,
+        community: state.extra as StudentCommunityModel,
       );
 
   @override
@@ -38,7 +39,7 @@ class CommunityDetailsPage extends ConsumerWidget {
           physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
           child: Text(
-            community['community_name'],
+            community.communityName,
             style: const TextStyle(
               color: ColorPalette.blue,
               fontSize: 20,
@@ -75,7 +76,7 @@ class CommunityDetailsPage extends ConsumerWidget {
               ),
               cursorColor: ColorPalette.blue,
               readOnly: true,
-              initialValue: community["community_president"],
+              initialValue: community.communityPresident,
               decoration: const InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
                   vertical: 0,
@@ -114,7 +115,7 @@ class CommunityDetailsPage extends ConsumerWidget {
               maxLines: 2,
               cursorColor: ColorPalette.blue,
               readOnly: true,
-              initialValue: community['community_purpose'],
+              initialValue: community.communityPurpose,
               decoration: const InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
                   vertical: 10,
@@ -153,7 +154,7 @@ class CommunityDetailsPage extends ConsumerWidget {
               maxLines: 2,
               cursorColor: ColorPalette.blue,
               readOnly: true,
-              initialValue: community['activities'],
+              initialValue: community.activities,
               decoration: const InputDecoration(
                 contentPadding: EdgeInsets.symmetric(
                   vertical: 10,
@@ -190,7 +191,7 @@ class CommunityDetailsPage extends ConsumerWidget {
                 fontSize: 16,
               ),
               maxLines: 2,
-              initialValue: community['investment'],
+              initialValue: community.investment,
               readOnly: true,
               cursorColor: ColorPalette.blue,
               decoration: const InputDecoration(
@@ -260,7 +261,7 @@ class CommunityDetailsPage extends ConsumerWidget {
                         SizedBox(
                           width: deviceSize.width * 0.6,
                           child: SelectableText(
-                            community['email'],
+                            community.email,
                             style: const TextStyle(
                               color: ColorPalette.darkPurple,
                               fontSize: 15,
@@ -288,7 +289,7 @@ class CommunityDetailsPage extends ConsumerWidget {
                         SizedBox(
                           width: deviceSize.width * 0.6,
                           child: SelectableText(
-                            community['phone'],
+                            community.phone,
                             style: const TextStyle(
                               color: ColorPalette.darkPurple,
                               fontSize: 15,

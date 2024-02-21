@@ -1,7 +1,10 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:investhub/data/models/applicant_model.dart';
 
-class StudentCommunityModel extends Equatable {
+class StudentCommunityModel extends Equatable with Applicant {
   final int? id;
   final bool formFilled;
   final String state,
@@ -14,7 +17,7 @@ class StudentCommunityModel extends Equatable {
       investment;
   final Image? image;
 
-  const StudentCommunityModel({
+  StudentCommunityModel({
     this.id,
     required this.formFilled,
     required this.state,
@@ -26,7 +29,11 @@ class StudentCommunityModel extends Equatable {
     required this.communityPurpose,
     required this.investment,
     this.image,
-  });
+  }) {
+    statee = state;
+    namee = communityName;
+    purposee = communityPurpose;
+  }
 
   Map<String, dynamic> toMap() => <String, dynamic>{
         "id": id,

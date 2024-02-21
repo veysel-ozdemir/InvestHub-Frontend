@@ -1,12 +1,14 @@
 import 'dart:math';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:investhub/cloud/cloud_service.dart';
 import 'package:investhub/const/color_palette.dart';
-import 'package:investhub/data/community_data.dart';
-import 'package:investhub/data/individual_project_data.dart';
+import 'package:investhub/data/models/applicant_model.dart';
+import 'package:investhub/data/models/individual_model.dart';
+import 'package:investhub/data/models/student_community_model.dart';
 import 'package:investhub/presentation/widgets/app_alert.dart';
 import 'package:investhub/route/route_location.dart';
 
@@ -22,24 +24,39 @@ class InvestorHomePage extends ConsumerStatefulWidget {
 
 class _InvestorHomePageState extends ConsumerState<InvestorHomePage> {
   final TextEditingController _searchController = TextEditingController();
-  List<Map<String, dynamic>> _foundCommunityList = [];
+  List<Applicant> _foundProjectsList = [];
 
-  void _runFilter(String enteredKeyword) {
-    List<Map<String, dynamic>> communityResults;
-    List<Map<String, dynamic>> projectResults;
-    List<Map<String, dynamic>> mergedResults = [];
+  Future<void> _runFilter(String enteredKeyword) async {
+    List<dynamic> communityResults = [];
+    List<dynamic> projectResults = [];
+    List<Applicant> mergedResults = [];
+    QuerySnapshot queryCommunity;
+    QuerySnapshot queryIndividual;
 
     if (enteredKeyword.isEmpty) {
-      communityResults = communityList;
-      projectResults = projectList;
+      queryCommunity = await CloudService().studentCommunity.get();
+      communityResults = queryCommunity.docs
+          .map((e) =>
+              StudentCommunityModel.fromMap(e.data() as Map<String, dynamic>))
+          .toList();
+      queryIndividual = await CloudService().individuals.get();
+      projectResults = queryIndividual.docs
+          .map((e) => IndividualModel.fromMap(e.data() as Map<String, dynamic>))
+          .toList();
     } else {
-      communityResults = communityList
-          .where((community) => community["community_name"]
+      queryCommunity = await CloudService().studentCommunity.get();
+      communityResults = queryCommunity.docs
+          .map((e) =>
+              StudentCommunityModel.fromMap(e.data() as Map<String, dynamic>))
+          .where((element) => element.communityName
               .toLowerCase()
               .contains(enteredKeyword.toLowerCase()))
           .toList();
-      projectResults = projectList
-          .where((project) => project["project_name"]
+
+      queryIndividual = await CloudService().individuals.get();
+      projectResults = queryIndividual.docs
+          .map((e) => IndividualModel.fromMap(e.data() as Map<String, dynamic>))
+          .where((element) => element.projectName
               .toLowerCase()
               .contains(enteredKeyword.toLowerCase()))
           .toList();
@@ -58,16 +75,27 @@ class _InvestorHomePageState extends ConsumerState<InvestorHomePage> {
     }
 
     setState(() {
-      _foundCommunityList = mergedResults;
+      _foundProjectsList = mergedResults;
     });
   }
 
-  @override
-  void initState() {
-    super.initState();
-    List<Map<String, dynamic>> communityResults = communityList;
-    List<Map<String, dynamic>> projectResults = projectList;
-    List<Map<String, dynamic>> mergedResults = [];
+  Future<void> _fetchData() async {
+    List<dynamic> communityResults;
+    List<dynamic> projectResults;
+    List<Applicant> mergedResults = [];
+    QuerySnapshot queryCommunity;
+    QuerySnapshot queryIndividual;
+
+    queryCommunity = await CloudService().studentCommunity.get();
+    communityResults = queryCommunity.docs
+        .map((e) =>
+            StudentCommunityModel.fromMap(e.data() as Map<String, dynamic>))
+        .toList();
+
+    queryIndividual = await CloudService().individuals.get();
+    projectResults = queryIndividual.docs
+        .map((e) => IndividualModel.fromMap(e.data() as Map<String, dynamic>))
+        .toList();
 
     for (int i = 0;
         i < max(communityResults.length, projectResults.length);
@@ -81,7 +109,15 @@ class _InvestorHomePageState extends ConsumerState<InvestorHomePage> {
       }
     }
 
-    _foundCommunityList = mergedResults;
+    setState(() {
+      _foundProjectsList = mergedResults;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchData();
   }
 
   @override
@@ -170,18 +206,18 @@ class _InvestorHomePageState extends ConsumerState<InvestorHomePage> {
             Expanded(
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
-                itemCount: _foundCommunityList.length,
+                itemCount: _foundProjectsList.length,
                 itemBuilder: (context, index) => GestureDetector(
-                  onTap: () =>
-                      _foundCommunityList[index]['state'] == 'community'
-                          ? context.push(
-                              RouteLocations.communityDetails,
-                              extra: _foundCommunityList[index],
-                            )
-                          : context.push(
-                              RouteLocations.projectDetails,
-                              extra: _foundCommunityList[index],
-                            ),
+                  onTap: () => _foundProjectsList[index].statee == 'community'
+                      ? context.push(
+                          RouteLocations.communityDetails,
+                          extra: _foundProjectsList[index]
+                              as StudentCommunityModel,
+                        )
+                      : context.push(
+                          RouteLocations.projectDetails,
+                          extra: _foundProjectsList[index] as IndividualModel,
+                        ),
                   child: Card(
                     shape: const BeveledRectangleBorder(),
                     key: ValueKey(index),
@@ -209,12 +245,7 @@ class _InvestorHomePageState extends ConsumerState<InvestorHomePage> {
                               child: Column(
                                 children: [
                                   Text(
-                                    _foundCommunityList[index]['state'] ==
-                                            'community'
-                                        ? _foundCommunityList[index]
-                                            ["community_name"]
-                                        : _foundCommunityList[index]
-                                            ["project_name"],
+                                    _foundProjectsList[index].namee!,
                                     maxLines: 1,
                                     textAlign: TextAlign.center,
                                     overflow: TextOverflow.ellipsis,
@@ -227,12 +258,7 @@ class _InvestorHomePageState extends ConsumerState<InvestorHomePage> {
                                   ),
                                   const Gap(8),
                                   Text(
-                                    _foundCommunityList[index]['state'] ==
-                                            'community'
-                                        ? _foundCommunityList[index]
-                                            ["community_purpose"]
-                                        : _foundCommunityList[index]
-                                            ["project_purpose"],
+                                    _foundProjectsList[index].purposee!,
                                     maxLines: 3,
                                     textAlign: TextAlign.center,
                                     overflow: TextOverflow.ellipsis,

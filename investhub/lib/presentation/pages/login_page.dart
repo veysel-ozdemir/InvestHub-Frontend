@@ -10,6 +10,7 @@ import 'package:investhub/cloud/cloud_service.dart';
 import 'package:investhub/const/color_palette.dart';
 import 'package:investhub/data/models/individual_model.dart';
 import 'package:investhub/data/models/student_community_model.dart';
+import 'package:investhub/provider/investor_email_provider.dart';
 import 'package:investhub/route/route_location.dart';
 import 'package:investhub/utils/extensions.dart';
 
@@ -188,6 +189,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           CloudService().investors.doc(document.id).get();
                           final data = document.data() as Map<String, dynamic>;
                           if (data['form_filled'] == true) {
+                            ref
+                                .read(investorEmailProvider.notifier)
+                                .updateEmail(_emailController.text);
                             context.go(RouteLocations.investorHome);
                           } else {
                             context.go(
